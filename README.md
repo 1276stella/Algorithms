@@ -1,1 +1,1 @@
-# Algorithms
+# Leetcode Algorithm Problem Solutions in JavaScript
