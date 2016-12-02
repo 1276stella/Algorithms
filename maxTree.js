@@ -26,8 +26,8 @@ var maxTree = function(A) {
 	for(var i = 0; i < A.length; i++) {
 		// The original thought is if current element A[i] is larger than the topElement in the stack, pop the topElement 
 		// from the stack until the topElement is larger than A[i], then topElement is the left closest element larger than A[i].
-		// But notice when for the topElment in the stack, then A[i] is the closest element larger than topElement on the right side
-		// and the element below topElment in the stack is its left closest index. So target can be the element popped out instead of A[i].
+		// But notice for a topElment in the stack, A[i] is the closest element larger than topElement on the right side
+		// and the element below topElment in the stack is its left closest element. So target can be the element popped out instead of A[i].
 		while(A[i] > A[stack.peek()]) {
 			var topElementIndex = stack.pop();
 			var left = stack.peek();
