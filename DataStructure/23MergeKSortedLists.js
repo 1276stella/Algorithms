@@ -9,6 +9,8 @@
  * @param {ListNode[]} lists
  * @return {ListNode}
  */
+// Version 1: Use heap to find the minimum value of the k elements
+// Time complexity O(Nlogk), where N is the total node number of k lists. 
 var buildAHeap = function(array) {
   var l = array.length;
   for(var i = Math.floor(l / 2) - 1; i >= 0; i--) {
