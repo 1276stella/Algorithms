@@ -11,45 +11,54 @@
  * @return {RandomListNode}
  */
 var copyRandomList = function(head) {
-    if(head === null) {
-        return null;
-    }
-
-    // clone the node and insert it after the original node
-    // assume original linked list is 1 -> 2 -> 3 -> null
-    // after this, it becomes 1 -> 1' -> 2 -> 2' -> 3 -> 3' -> null    
-    var node = head;
-    while(node !== null) {
-        var clonedNode = new RandomListNode(node.label);
-        clonedNode.next = node.next;
-        node.next = clonedNode;
-        node = node.next.next;
-    }
-
-    // set up the random pointer of the cloned nodes
-    node = head;
-    while(node !== null) {
-        clonedNode = node.next;
-        if(node.random !== null) {
-            clonedNode.random = node.random.next;
-        }
-        node = node.next.next;
-    }    
-    
-    // split the two linked lists
-    var clonedHead = head.next;
-    var current = head;
-    var next = current.next;
-    while(next !== null) {
-        current.next = current.next.next;
-        current = next;
-        next = current.next;
-    }
-    
-    return clonedHead;
-    
+  if(head === null) {
+    return null;
+  }
+  // clone the node and insert it after the original node
+  // assume original linked list is 1 -> 2 -> 3 -> null
+  // after this, it becomes 1 -> 1' -> 2 -> 2' -> 3 -> 3' -> null  
+  cloneNodes(head);
+  // set up the random pointer of the cloned nodes    
+  createRandomPointers(head);
+  // split the two linked lists  
+  return splitList(head);
 };
 
+var cloneNodes = function(head) {
+  while(head !== null) {
+    var clonedNode = new RandomListNode(head.label);
+    clonedNode.next = head.next;
+    head.next = clonedNode;
+    head = head.next.next;
+  }
+};
+var createRandomPointers = function(head) {
+  while(head !== null) {
+    if(head.random !== null) {
+      head.next.random = head.random.next;
+    }
+    head = head.next.next;
+  }
+};
+var splitList = function(head) {
+  var count = 0;
+  var originDummy = new RandomListNode(0), cloneDummy = new RandomListNode(0);
+  var origin = originDummy, clone = cloneDummy;
+  while(head !== null) {
+    if(count % 2 === 0) {
+      origin.next = head;
+      origin = origin.next;
+    } else {
+      clone.next = head;
+      clone = clone.next;
+    }
+    head = head.next;
+    count++;
+  }
+  origin.next = null;
+  clone.next = null;
+  return cloneDummy.next; 
+};
 function RandomListNode(label) {
       this.label = label;
       this.next = this.random = null;

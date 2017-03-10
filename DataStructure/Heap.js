@@ -55,7 +55,32 @@ var minHeapSiftUp = function(i, array) {
     minHeapSiftUp(parent, array);
   }
 }
+var getLeftChild = function(i) {
+  return 2 * i + 1;
+};
+var getRightChild = function(i) {
+  return 2 * i + 2;
+};
+var getParent = function(i) {
+  return Math.floor((i - 1)/2);  
+};
+var getSibling = function(i) {
+  var parent = getParent(i);
+  var left = getLeftChild(parent);
+  var right = getRightChild(parent);
 
+  if(i === left) {
+    return right;
+  }
+  if(i === right) {
+    return left;
+  } 
+};
+var swap = function(array, i, j) {
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp; 
+};
 /**
  * Implemention of Maximum Heap
  */

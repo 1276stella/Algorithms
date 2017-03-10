@@ -1,23 +1,17 @@
 var inorderTraversal = function(root) {
-    var result = [];
-    if(root === null) {
-        return result;
+  var stack = [], result = [];
+  var node = root;
+  while(stack.length > 0 || node !== null) {
+    while(node !== null) {
+        stack.push(node);
+        node = node.left;
     }
-    var stack = [];
-    var node = root;
-    
-    while(stack.length !== 0 || node !== null) {
-        while(node !== null) {
-            stack.push(node);
-            node = node.left;
-        } 
-        node = stack.pop();
-        result.push(node.val);
-        node = node.right;
-    }
-    return result;
+    node = stack.pop();
+    result.push(node.val);
+    node = node.right;
+  }  
+  return result;
 };
-
 var TreeNode = function(val) {
   this.val = val;
   this.left = this.right = null;

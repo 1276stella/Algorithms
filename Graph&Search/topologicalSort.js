@@ -102,5 +102,6 @@ graph.push(nodeB);
 graph.push(nodeC);
 graph.push(nodeD);
 
+console.log(graph);
 // console.log(topologicalSortDFS(graph)); // [ 'D', 'A', 'B', 'C' ]
 console.log(topologicalSortBFS(graph)); // [ 'A', 'D', 'B', 'C' ]

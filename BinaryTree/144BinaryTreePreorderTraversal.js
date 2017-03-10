@@ -61,27 +61,23 @@
 
 // iterative version 2
 var preorderTraversal = function(root) {
-    if(root === null) {
-        return [];
+  if(root === null) {
+    return [];
+  }
+  var stack = [], result = [];
+  stack.push(root);
+  while(stack.length > 0) {
+    var node = stack.pop();
+    result.push(node.val);
+    if(node.right !== null) {
+        stack.push(node.right);
     }
-    var result = [];
-    var stack = [];
-    stack.push(root);
-    
-    while(stack.length > 0) {
-        var node = stack.pop();
-        result.push(node.val);
-        if(node.right !== null) {
-            stack.push(node.right);
-        }
-        if(node.left !== null) {
-            stack.push(node.left);
-        }
-    }
-    
-    return result;
+    if(node.left !== null) {
+        stack.push(node.left);
+    }    
+  }
+  return result;
 };
-
 var TreeNode = function(val) {
   this.val = val;
   this.left = this.right = null;
